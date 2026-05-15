@@ -3,45 +3,69 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>15 Mayıs 2026 — Günlük Rapor</title>
-<meta name="description" content="Otomatik üretilen, detaylı, Türkçe günlük haber raporu — finans, küresel gündem, Türkiye ve teknoloji." />
+<meta name="color-scheme" content="dark" />
+<title>15 Mayıs 2026 — Günlük</title>
+<meta name="description" content="Otomatik üretilen, detaylı, Türkçe günlük dispatch — finans, küresel gündem, Türkiye, teknoloji." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body class="page-report">
+
+<div class="grain" aria-hidden="true"></div>
+
 <header class="masthead">
-  <a class="masthead__brand" href="../index.html">
+  <div class="masthead__row">
+    <a class="masthead__brand" href="../index.html" aria-label="Günlük Rapor — anasayfa">
+      <span class="masthead__wordmark">Günlük<em>.</em></span>
+    </a>
     <span class="masthead__rule" aria-hidden="true"></span>
-    <span class="masthead__title">Günlük&nbsp;Rapor</span>
-    <span class="masthead__rule" aria-hidden="true"></span>
-  </a>
-  <p class="masthead__meta">
-    <span>Otomatik · Türkçe · Günlük</span>
-    <span class="masthead__sep">·</span>
-    <span>Cilt 1</span>
+    <div class="masthead__meta">
+      <span class="masthead__meta-item"><span class="masthead__meta-key">Cilt</span> 1</span>
+      <span class="masthead__meta-sep" aria-hidden="true">/</span>
+      <span class="masthead__meta-item"><span class="masthead__meta-key">Dispatch</span> 1</span>
+      <span class="masthead__meta-sep" aria-hidden="true">/</span>
+      <span class="masthead__meta-item"><span class="masthead__meta-key">Yıl</span> 2026</span>
+    </div>
+  </div>
+  <p class="masthead__strap">
+    <span class="masthead__strap-dot" aria-hidden="true"></span>
+    Türkçe günlük dispatch — finans, küresel, Türkiye, teknoloji
   </p>
 </header>
 
 <main class="canvas">
 <article class="issue">
   <header class="issue__head">
-    <p class="issue__kicker">Sayı No. 1</p>
+    <div class="issue__head-row">
+      <p class="issue__kicker">Dispatch №001</p>
+      <span class="issue__head-rule" aria-hidden="true"></span>
+      <p class="issue__stamp">Yayın: <time datetime="2026-05-15">2026-05-15</time></p>
+    </div>
     <h1 class="issue__date">
       <span class="issue__day">15</span>
-      <span class="issue__sep">·</span>
-      <span class="issue__month">Mayıs</span>
-      <span class="issue__sep">·</span>
-      <span class="issue__year">2026</span>
+      <span class="issue__rest">
+        <span class="issue__month">Mayıs</span>
+        <span class="issue__year">2026</span>
+      </span>
     </h1>
-    <p class="issue__nav">
-        <span class="issue__nav-link issue__nav-link--disabled">← önceki yok</span>
-      <a class="issue__nav-link" href="../index.html">Tüm sayılar</a>
-        <span class="issue__nav-link issue__nav-link--disabled">sonraki yok</span>
-    </p>
   </header>
+
+  <nav class="issue__nav" aria-label="Sayı navigasyonu">
+      <span class="issue__nav-link issue__nav-link--disabled">
+        <span class="issue__nav-cue" aria-hidden="true">←</span>
+        <span class="issue__nav-label">Önceki yok</span>
+      </span>
+    <a class="issue__nav-link issue__nav-link--index" href="../index.html">
+      <span class="issue__nav-label">Tüm sayılar</span>
+    </a>
+      <span class="issue__nav-link issue__nav-link--disabled">
+        <span class="issue__nav-label">Sonraki yok</span>
+        <span class="issue__nav-cue" aria-hidden="true">→</span>
+      </span>
+  </nav>
 
   <div class="prose">
     <h1 id="gunluk-rapor-2026-05-15">Günlük Rapor — 2026-05-15</h1>
@@ -137,8 +161,20 @@ yayınlanacak.</em></p>
 </main>
 
 <footer class="colophon">
-  <p>Otomatik üretildi — kaynak veri RSS yayınlarından derlenir, analitik metin Claude tarafından yazılır.</p>
-  <p>Repo: <a href="https://github.com/emreozogul/daily-report-site">daily-report-site</a> · Son güncelleme: <time datetime="2026-05-15T12:53:33+00:00">2026-05-15 12:53 UTC</time></p>
+  <div class="colophon__row colophon__row--top">
+    <span class="colophon__brand">Günlük<em>.</em></span>
+    <span class="colophon__rule" aria-hidden="true"></span>
+    <span class="colophon__stamp">Late-Night Dispatch · No. 1</span>
+  </div>
+  <p class="colophon__line">
+    Ham veri otomatik kazınır; analitik metin Claude tarafından yazılır. Anlatıyı, kaynakları ve
+    rakamları her zaman birincil yayınlarla doğrulayın.
+  </p>
+  <p class="colophon__line colophon__line--meta">
+    <a href="https://github.com/emreozogul/daily-report-site">github.com/emreozogul/daily-report-site</a>
+    <span aria-hidden="true">·</span>
+    <time datetime="2026-05-15T20:19:47+00:00">Son derleme 2026-05-15 20:19 UTC</time>
+  </p>
 </footer>
 </body>
 </html>

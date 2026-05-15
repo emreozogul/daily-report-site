@@ -3,64 +3,94 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Günlük Rapor — Türkçe günlük haber özeti</title>
-<meta name="description" content="Otomatik üretilen, detaylı, Türkçe günlük haber raporu — finans, küresel gündem, Türkiye ve teknoloji." />
+<meta name="color-scheme" content="dark" />
+<title>Günlük — Türkçe dispatch</title>
+<meta name="description" content="Otomatik üretilen, detaylı, Türkçe günlük dispatch — finans, küresel gündem, Türkiye, teknoloji." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body class="page-index">
+
+<div class="grain" aria-hidden="true"></div>
+
 <header class="masthead">
-  <a class="masthead__brand" href="index.html">
+  <div class="masthead__row">
+    <a class="masthead__brand" href="index.html" aria-label="Günlük Rapor — anasayfa">
+      <span class="masthead__wordmark">Günlük<em>.</em></span>
+    </a>
     <span class="masthead__rule" aria-hidden="true"></span>
-    <span class="masthead__title">Günlük&nbsp;Rapor</span>
-    <span class="masthead__rule" aria-hidden="true"></span>
-  </a>
-  <p class="masthead__meta">
-    <span>Otomatik · Türkçe · Günlük</span>
-    <span class="masthead__sep">·</span>
-    <span>Cilt 1</span>
+    <div class="masthead__meta">
+      <span class="masthead__meta-item"><span class="masthead__meta-key">Cilt</span> 1</span>
+      <span class="masthead__meta-sep" aria-hidden="true">/</span>
+      <span class="masthead__meta-item"><span class="masthead__meta-key">Dispatch</span> 1</span>
+      <span class="masthead__meta-sep" aria-hidden="true">/</span>
+      <span class="masthead__meta-item"><span class="masthead__meta-key">Yıl</span> 2026</span>
+    </div>
+  </div>
+  <p class="masthead__strap">
+    <span class="masthead__strap-dot" aria-hidden="true"></span>
+    Türkçe günlük dispatch — finans, küresel, Türkiye, teknoloji
   </p>
 </header>
 
 <main class="canvas">
 
-<section class="hero">
-  <p class="hero__kicker">Son sayı</p>
-  <h1 class="hero__date">
-    <span class="hero__day">15</span>
-    <span class="hero__month">Mayıs</span>
-    <span class="hero__year">2026</span>
-  </h1>
-  <p class="hero__lead">Bugünkü ham haber akışı yarın sabah üretilecek ilk otomatik raporun hammaddesini oluşturuyor.</p>
-  <a class="hero__cta" href="reports/2026-05-15.html">
-    Bugünkü raporu oku <span aria-hidden="true">→</span>
-  </a>
-  <ul class="hero__chips">
-      <li>Finans ve Piyasalar</li>
-      <li>Küresel Gündem</li>
-      <li>Türkiye Gündemi</li>
-      <li>Teknoloji ve Bilim</li>
-  </ul>
+<section class="hero" aria-labelledby="hero-date">
+  <div class="hero__left">
+    <p class="hero__kicker"><span class="hero__pulse" aria-hidden="true"></span>Bugünün dispatch'i</p>
+    <h1 class="hero__date" id="hero-date">
+      <span class="hero__day">15</span>
+      <span class="hero__strap">
+        <span class="hero__month">Mayıs</span>
+        <span class="hero__year">2026</span>
+      </span>
+    </h1>
+  </div>
+  <div class="hero__right">
+    <p class="hero__lead">Bugünkü ham haber akışı yarın sabah üretilecek ilk otomatik raporun hammaddesini oluşturuyor.</p>
+    <ul class="hero__chips" aria-label="Bölümler">
+        <li><span class="hero__chip-no">01</span>Finans ve Piyasalar</li>
+        <li><span class="hero__chip-no">02</span>Küresel Gündem</li>
+        <li><span class="hero__chip-no">03</span>Türkiye Gündemi</li>
+        <li><span class="hero__chip-no">04</span>Teknoloji ve Bilim</li>
+    </ul>
+    <a class="hero__cta" href="reports/2026-05-15.html">
+      <span class="hero__cta-text">Bugünün dispatch'ini oku</span>
+      <span class="hero__cta-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
 </section>
 
-<section class="archive">
+<section class="archive" aria-labelledby="archive-heading">
   <header class="archive__head">
+    <p class="archive__kicker">Arşiv</p>
+    <h2 class="archive__title" id="archive-heading">Geçmiş sayılar</h2>
     <span class="archive__rule" aria-hidden="true"></span>
-    <h2 class="archive__title">Arşiv</h2>
     <span class="archive__count">0 sayı</span>
   </header>
-  <ol class="archive__list" reversed>
-  </ol>
+  <p class="archive__empty">Henüz arşivlenmiş sayı yok.</p>
 </section>
 
 </main>
 
 <footer class="colophon">
-  <p>Otomatik üretildi — kaynak veri RSS yayınlarından derlenir, analitik metin Claude tarafından yazılır.</p>
-  <p>Repo: <a href="https://github.com/emreozogul/daily-report-site">daily-report-site</a> · Son güncelleme: <time datetime="2026-05-15T12:53:33+00:00">2026-05-15 12:53 UTC</time></p>
+  <div class="colophon__row colophon__row--top">
+    <span class="colophon__brand">Günlük<em>.</em></span>
+    <span class="colophon__rule" aria-hidden="true"></span>
+    <span class="colophon__stamp">Late-Night Dispatch · No. 1</span>
+  </div>
+  <p class="colophon__line">
+    Ham veri otomatik kazınır; analitik metin Claude tarafından yazılır. Anlatıyı, kaynakları ve
+    rakamları her zaman birincil yayınlarla doğrulayın.
+  </p>
+  <p class="colophon__line colophon__line--meta">
+    <a href="https://github.com/emreozogul/daily-report-site">github.com/emreozogul/daily-report-site</a>
+    <span aria-hidden="true">·</span>
+    <time datetime="2026-05-15T20:19:47+00:00">Son derleme 2026-05-15 20:19 UTC</time>
+  </p>
 </footer>
 </body>
 </html>
