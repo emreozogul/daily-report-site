@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=2026-05-15T20:27:59+00:00">
+<link rel="stylesheet" href="assets/site.css?v=2026-05-15T20:36:19+00:00">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body class="page-index">
@@ -36,14 +36,22 @@
 <main class="canvas">
 
 <section class="hero" aria-labelledby="hero-date">
-  <p class="hero__kicker">Bugünün Raporu</p>
-  <h1 class="hero__date" id="hero-date">
-    <span class="hero__day">15</span>
-    <span class="hero__month">Mayıs</span>
-  </h1>
-  <p class="hero__year">2026</p>
+  <div class="hero__top">
+    <p class="hero__kicker">Bugünün Raporu</p>
+    <h1 class="hero__date" id="hero-date">
+      <span class="hero__day">15</span>
+      <span class="hero__month">Mayıs</span>
+      <span class="hero__year">2026</span>
+    </h1>
+  </div>
 
-  <p class="hero__lead">Bugünkü ham haber akışı yarın sabah üretilecek ilk otomatik raporun hammaddesini oluşturuyor.</p>
+  <div class="hero__body">
+    <p class="hero__lead">Bugünkü ham haber akışı yarın sabah üretilecek ilk otomatik raporun hammaddesini oluşturuyor.</p>
+    <a class="hero__cta" href="reports/2026-05-15.html">
+      <span class="hero__cta-text">Raporu oku</span>
+      <span class="hero__cta-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
 
   <ul class="hero__chips" aria-label="Bölümler">
       <li><span class="hero__chip-no">01</span><span class="hero__chip-name">Finans ve Piyasalar</span></li>
@@ -51,11 +59,6 @@
       <li><span class="hero__chip-no">03</span><span class="hero__chip-name">Türkiye Gündemi</span></li>
       <li><span class="hero__chip-no">04</span><span class="hero__chip-name">Teknoloji ve Bilim</span></li>
   </ul>
-
-  <a class="hero__cta" href="reports/2026-05-15.html">
-    <span class="hero__cta-text">Raporu oku</span>
-    <span class="hero__cta-arrow" aria-hidden="true">→</span>
-  </a>
 </section>
 
 <section class="archive" aria-labelledby="archive-heading">
@@ -76,7 +79,7 @@
   <p class="colophon__line colophon__line--meta">
     <a href="https://github.com/emreozogul/daily-report-site">github.com/emreozogul/daily-report-site</a>
     <span aria-hidden="true">·</span>
-    <time datetime="2026-05-15T20:27:59+00:00">Son derleme 2026-05-15 20:27 UTC</time>
+    <time datetime="2026-05-15T20:36:19+00:00">Son derleme 2026-05-15 20:36 UTC</time>
   </p>
 </footer>
 </body>
