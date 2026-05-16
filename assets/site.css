@@ -222,6 +222,20 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
   border-bottom: 1px solid var(--rule);
 }
 
+/* Staggered entrance — content reveals line-by-line on first paint */
+.hero > * {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: heroReveal 700ms var(--ease) forwards;
+}
+.hero > .hero__top { animation-delay:  50ms; }
+.hero > .hero__body { animation-delay: 220ms; }
+.hero > .hero__chips { animation-delay: 360ms; }
+
+@keyframes heroReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .hero__top {
   display: grid;
   gap: 0.4rem;
@@ -855,6 +869,38 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
 }
 
 /* ─────────────────────────────────────────────────────────
+   BUGÜNÜN TEZİ — the editor's opening statement
+   Targets the first paragraph after the "Bugünün Tezi" H3 and lifts
+   it into a pull-quote with a left-side accent rule + italic display.
+   ───────────────────────────────────────────────────────── */
+.prose h3#bugnn-tezi + p,
+.prose h3[id*="bugun"] + p,
+.prose h3[id*="tezi"] + p {
+  position: relative;
+  margin: 0.5rem 0 2rem;
+  padding: 0.25rem 0 0.25rem 1.3rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 32;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 0.95rem + 0.65vw, 1.5rem);
+  line-height: 1.4;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  border-left: 2px solid var(--accent);
+}
+.prose h3#bugnn-tezi + p::first-letter,
+.prose h3[id*="bugun"] + p::first-letter,
+.prose h3[id*="tezi"] + p::first-letter {
+  /* override the prose drop-cap behaviour for this paragraph */
+  font-size: inherit;
+  float: none;
+  padding: 0;
+  color: inherit;
+  line-height: inherit;
+}
+
+/* ─────────────────────────────────────────────────────────
    FORECAST — investment direction cards
    Replaces the 'Yön Beklentileri' markdown block. Each card is
    a tight rectangle with a leading direction glyph (↑ ↓ →),
@@ -903,15 +949,25 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
   grid-template-columns: auto minmax(0, 1fr);
   gap: 0.7rem;
   align-items: start;
-  padding: 0.75rem 0.95rem 0.85rem;
+  padding: 0.85rem 1rem 1rem;
   border: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.28);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--dir-color) 6%, transparent) 0%,
+      transparent 60%
+    ),
+    rgba(255, 255, 255, 0.32);
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  transition: border-color 320ms var(--ease), background 320ms var(--ease);
+}
+.prose .forecast-card:hover {
+  border-color: var(--dir-color);
 }
 .prose .forecast-card::before {
-  /* Tiny direction-colored hairline along the left edge */
+  /* Direction-colored hairline along the left edge */
   content: "";
   position: absolute;
   left: 0;
@@ -920,6 +976,32 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
   width: 2px;
   background: var(--dir-color, var(--rule));
 }
+.prose .forecast-card::after {
+  /* Magnitude bar at the bottom — fills for up, anchors right for down,
+     dashed line for flat. Gives each card a tiny chart-like signal. */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--dir-color);
+  transform-origin: left center;
+  opacity: 0.55;
+}
+.prose .forecast-card--up::after    { transform: scaleX(0.85); transform-origin: left center; }
+.prose .forecast-card--down::after  { transform: scaleX(0.85); transform-origin: right center; }
+.prose .forecast-card--flat::after  {
+  background: repeating-linear-gradient(
+    to right,
+    var(--dir-color) 0 6px,
+    transparent 6px 12px
+  );
+  transform: scaleX(0.65);
+  opacity: 0.4;
+}
+.prose .forecast-card:hover::after { transform: scaleX(1); opacity: 0.8; }
+.prose .forecast-card--flat:hover::after { opacity: 0.6; }
 .prose .forecast-card--up   { --dir-color: var(--dir-up);   }
 .prose .forecast-card--down { --dir-color: var(--dir-down); }
 .prose .forecast-card--flat { --dir-color: var(--dir-flat); }
@@ -1037,15 +1119,27 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
   transition: width 380ms var(--ease);
   z-index: 1;
 }
+.prose .link-card {
+  /* Add scale transition + subtle drop shadow buildup */
+  transition:
+    border-color 320ms var(--ease),
+    background 320ms var(--ease),
+    color 320ms var(--ease),
+    transform 320ms var(--ease),
+    box-shadow 320ms var(--ease);
+  will-change: transform;
+}
 .prose .link-card:hover {
-  border-color: var(--ink-soft);
-  background: rgba(255, 255, 255, 0.55);
+  border-color: var(--ink);
+  background: rgba(255, 255, 255, 0.65);
   color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px -12px rgba(30, 26, 22, 0.35);
 }
 .prose .link-card:hover::before { width: 100%; }
 .prose .link-card:hover .link-card__arrow {
   color: var(--accent);
-  transform: translate(2px, -2px);
+  transform: translate(3px, -3px);
 }
 .prose .link-card:focus-visible {
   outline: 2px solid var(--accent);
