@@ -27,8 +27,12 @@
   --accent-hi:    #c84d33;
   --accent-soft:  #f1d9c8;
 
-  /* Type system */
+  /* Type system
+     --display : huge italic editorial type (date, headings)
+     --read    : long-form reading body (prose, leads) — variable serif
+     --body    : tight UI labels (meta, chip numbers, archive count) */
   --display: "Fraunces", "EB Garamond", "Source Serif Pro", Georgia, serif;
+  --read:    "Newsreader", "Source Serif Pro", "EB Garamond", Georgia, serif;
   --body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Geometry */
@@ -37,6 +41,8 @@
   --reading: 64ch;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+
+html { scroll-behavior: smooth; }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -427,11 +433,12 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-family: var(--body);
-  font-size: clamp(0.88rem, 0.85rem + 0.1vw, 0.96rem);
-  line-height: 1.45;
+  font-family: var(--read);
+  font-size: clamp(0.92rem, 0.88rem + 0.12vw, 1rem);
+  line-height: 1.55;
   color: var(--ink-soft);
   max-width: 62ch;
+  font-feature-settings: "onum";
 }
 .archive__cue {
   font-family: var(--display);
@@ -568,6 +575,72 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   color: var(--ink);
 }
 
+/* In-page section chip nav at the top of a report.
+   Pill buttons that scroll-jump to the corresponding §. */
+.issue__chips {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem 1.25rem;
+  align-items: baseline;
+  padding: 0.5rem 0 0.25rem;
+}
+.issue__chips-label {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 600;
+  white-space: nowrap;
+  padding-top: 0.45rem;
+}
+.issue__chips-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
+}
+.issue__chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  font-family: var(--read);
+  font-size: 0.92rem;
+  line-height: 1;
+  color: var(--ink);
+  transition:
+    border-color 200ms var(--ease),
+    background 200ms var(--ease),
+    color 200ms var(--ease),
+    transform 200ms var(--ease);
+  white-space: nowrap;
+}
+.issue__chip:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.issue__chip:active { transform: translateY(0); }
+.issue__chip-no {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 96;
+  font-size: 1.05em;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.issue__chip-name {
+  font-feature-settings: "onum";
+  font-style: italic;
+}
+
 /* =========================================================
    PROSE — analytical long-form
    ========================================================= */
@@ -577,9 +650,11 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   max-width: min(var(--reading), 100%);
   width: 100%;
   margin: 0 auto;
-  font-family: var(--body);
-  font-size: clamp(1rem, 0.95rem + 0.18vw, 1.13rem);
-  line-height: 1.78;
+  font-family: var(--read);
+  font-optical-sizing: auto;
+  font-feature-settings: "ss01", "onum", "liga";
+  font-size: clamp(1.02rem, 0.95rem + 0.25vw, 1.2rem);
+  line-height: 1.72;
   color: var(--ink);
   counter-reset: section;
   /* Safeguards: long URLs and table-like content shouldn't blow out mobile */
@@ -587,6 +662,9 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   word-wrap: break-word;
   min-width: 0;
 }
+/* Anchor jump offset so the heading isn't flush with the viewport top
+   when a chip is clicked. */
+.prose > h2 { scroll-margin-top: 1.5rem; }
 
 .prose > h1 {
   font-family: var(--display);
@@ -655,7 +733,7 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
   font-weight: 400;
-  font-size: 4.2em;
+  font-size: 4.4em;
   float: left;
   line-height: 0.82;
   padding: 0.12em 0.14em 0 0;
@@ -666,9 +744,7 @@ body > *:not(.bg) { position: relative; z-index: 1; }
 .prose em {
   color: var(--ink);
   font-style: italic;
-  font-family: var(--display);
-  font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-size: 1.03em;
+  font-family: var(--read);
 }
 
 .prose blockquote {
@@ -742,11 +818,12 @@ body > *:not(.bg) { position: relative; z-index: 1; }
 }
 .colophon__line {
   margin: 0;
-  font-family: var(--body);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-family: var(--read);
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--ink-soft);
   max-width: 60ch;
+  font-feature-settings: "onum";
 }
 .colophon__line--meta {
   font-size: 0.78rem;
