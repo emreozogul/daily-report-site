@@ -1076,8 +1076,9 @@ body > *:not(.bg) { position: relative; z-index: 1; }
 }
 
 /* ─────────────────────────────────────────────────────────
-   BACK-TO-TOP — vertical editorial slab, fixed bottom-right
+   BACK-TO-TOP — compact square icon button, fixed bottom-right
    Hidden until the user scrolls past the hero / issue head.
+   No text — just an upward arrow. Accessible via aria-label.
    ───────────────────────────────────────────────────────── */
 .to-top {
   position: fixed;
@@ -1085,32 +1086,26 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   bottom: clamp(1rem, 1.5vw, 1.75rem);
   z-index: 50;
 
-  display: inline-grid;
-  justify-items: center;
-  align-content: center;
-  gap: 0.4rem;
-  padding: 0.85rem 0.7rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--ink);
-  /* No radius. Square slab. */
+  /* No radius. Square. */
 
-  font-family: var(--body);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 600;
-  line-height: 1.1;
-  text-align: center;
   cursor: pointer;
 
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
   transition:
-    opacity 280ms var(--ease),
-    transform 280ms var(--ease),
+    opacity 260ms var(--ease),
+    transform 260ms var(--ease),
     background 220ms var(--ease),
     border-color 220ms var(--ease);
 }
@@ -1123,47 +1118,30 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   background: var(--accent);
   border-color: var(--accent);
 }
-.to-top:hover .to-top__arrow {
-  transform: translateY(-4px);
-}
-.to-top:hover .to-top__rule {
-  width: 1.5rem;
-  opacity: 0.85;
-}
+.to-top:hover .to-top__arrow { transform: translateY(-3px); }
 .to-top:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 .to-top__arrow {
   display: block;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   line-height: 1;
   color: var(--paper);
   font-family: var(--display);
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1;
-  transition: transform 260ms var(--ease);
-}
-.to-top__rule {
-  display: block;
-  width: 1.05rem;
-  height: 1px;
-  background: var(--paper);
-  opacity: 0.55;
-  transition: width 260ms var(--ease), opacity 260ms var(--ease);
-}
-.to-top__label {
-  display: block;
-  color: var(--paper);
+  transition: transform 240ms var(--ease);
 }
 
 @media (max-width: 720px) {
   .to-top {
-    right: 0.9rem;
-    bottom: 0.9rem;
-    padding: 0.7rem 0.55rem;
-    font-size: 0.58rem;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
+  .to-top__arrow { font-size: 1.15rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
