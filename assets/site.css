@@ -84,7 +84,7 @@ a:focus-visible {
   z-index: 0;
   overflow: hidden;
 }
-body > *:not(.bg) { position: relative; z-index: 1; }
+body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
 
 .bg__wash {
   position: absolute;
