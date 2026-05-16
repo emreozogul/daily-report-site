@@ -308,22 +308,31 @@ body > *:not(.bg) { position: relative; z-index: 1; }
 .hero__cta {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.55rem;
+  gap: 0.7rem;
   width: max-content;
   font-family: var(--display);
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-size: clamp(1rem, 0.9rem + 0.3vw, 1.2rem);
+  font-size: clamp(1.05rem, 0.9rem + 0.4vw, 1.4rem);
   color: var(--ink);
-  padding: 0.2rem 0 0.3rem;
-  border-bottom: 1px solid var(--ink);
-  transition: color 200ms var(--ease), border-color 200ms var(--ease), gap 250ms var(--ease);
+  padding: 0.25rem 0 0.5rem;
+  /* Two-layer underline: 1px ink rule resting, 2px terracotta grows in on hover */
+  background-image:
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--ink), var(--ink));
+  background-size: 0 2px, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%, 0 100%;
+  transition:
+    color 220ms var(--ease),
+    background-size 320ms var(--ease),
+    gap 250ms var(--ease);
   white-space: nowrap;
 }
 .hero__cta:hover {
   color: var(--accent);
-  border-bottom-color: var(--accent);
-  gap: 0.85rem;
+  background-size: 100% 2px, 100% 1px;
+  gap: 1rem;
 }
 .hero__cta-arrow {
   font-family: var(--body);
@@ -542,16 +551,35 @@ body > *:not(.bg) { position: relative; z-index: 1; }
 .issue__nav-link--prev { justify-self: start; }
 .issue__nav-link--next { justify-self: end; }
 .issue__nav-link--index {
-  font-family: var(--display);
-  font-style: italic;
-  font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-size: 1rem;
+  position: relative;
+  font-family: var(--body);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
   color: var(--ink);
-  border-bottom: 1px solid var(--ink);
-  padding: 0.3rem 0;
+  border: 1px solid var(--ink);
+  padding: 0.7rem 1.4rem;
+  background: transparent;
+  transition: color 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease);
+  isolation: isolate;
 }
+.issue__nav-link--index::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 320ms var(--ease);
+  z-index: -1;
+}
+.issue__nav-link--index:hover {
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.issue__nav-link--index:hover::before { transform: scaleY(1); }
 .issue__nav-link:hover { color: var(--accent); }
-.issue__nav-link--index:hover { border-bottom-color: var(--accent); }
 .issue__nav-link--prev:hover { transform: translateX(-3px); }
 .issue__nav-link--next:hover { transform: translateX(3px); }
 .issue__nav-link--disabled { opacity: 0.35; pointer-events: none; }
@@ -575,24 +603,37 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   color: var(--ink);
 }
 
-/* In-page section chip nav at the top of a report.
-   Pill buttons that scroll-jump to the corresponding §. */
+/* ─────────────────────────────────────────────────────────
+   IN-PAGE SECTION CHIP NAV — editorial brutalist
+   Square hairline rectangles. On hover a 2px terracotta rule
+   slides under the chip; no pill, no fill, no rounded corners.
+   ───────────────────────────────────────────────────────── */
 .issue__chips {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.6rem 1.25rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.7rem 1.5rem;
   align-items: baseline;
   padding: 0.5rem 0 0.25rem;
+  position: relative;
+}
+.issue__chips::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.75rem;
+  height: 1px;
+  background: var(--rule);
 }
 .issue__chips-label {
   font-family: var(--body);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-faint);
   font-weight: 600;
   white-space: nowrap;
-  padding-top: 0.45rem;
+  padding-top: 0.55rem;
 }
 .issue__chips-list {
   list-style: none;
@@ -600,41 +641,59 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem 0.55rem;
+  gap: 0.45rem 0.5rem;
 }
 .issue__chip {
+  position: relative;
   display: inline-flex;
   align-items: baseline;
-  gap: 0.55rem;
-  padding: 0.45rem 0.95rem 0.5rem;
+  gap: 0.65rem;
+  padding: 0.55rem 0.95rem 0.6rem;
   border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.35);
+  background: transparent;
   font-family: var(--read);
   font-size: 0.92rem;
   line-height: 1;
   color: var(--ink);
-  transition:
-    border-color 200ms var(--ease),
-    background 200ms var(--ease),
-    color 200ms var(--ease),
-    transform 200ms var(--ease);
   white-space: nowrap;
+  isolation: isolate;
+  transition:
+    color 220ms var(--ease),
+    border-color 220ms var(--ease),
+    background 220ms var(--ease);
+}
+.issue__chip::before {
+  /* hairline that draws under the chip on hover */
+  content: "";
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--ease);
+  z-index: 1;
 }
 .issue__chip:hover {
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  border-color: var(--ink);
   color: var(--accent);
-  transform: translateY(-1px);
+  background: rgba(168, 65, 44, 0.04);
 }
-.issue__chip:active { transform: translateY(0); }
+.issue__chip:hover::before { transform: scaleX(1); }
+.issue__chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .issue__chip-no {
   font-family: var(--display);
   font-style: italic;
   font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 96;
-  font-size: 1.05em;
+  font-size: 1.1em;
   color: var(--accent);
   letter-spacing: -0.02em;
+  font-feature-settings: "lnum";
 }
 .issue__chip-name {
   font-feature-settings: "onum";
@@ -777,6 +836,132 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   border-bottom-color: var(--accent);
 }
 
+/* ─────────────────────────────────────────────────────────
+   LINK CARDS — 'Günün Bağlantıları' as a sharp grid
+   Built by scripts/build_site.py post-processing the markdown.
+   ───────────────────────────────────────────────────────── */
+.prose .prose__links-heading {
+  /* The "Günün Bağlantıları" H2 keeps its prose chrome but tightens spacing */
+  margin-bottom: 1.2rem;
+}
+.prose .link-group {
+  margin: 0 0 2.25rem;
+}
+.prose .link-group:last-child { margin-bottom: 0; }
+.prose .link-group__heading {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 96;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 0.95rem + 0.5vw, 1.45rem);
+  letter-spacing: -0.015em;
+  margin: 0 0 0.8rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+.prose .link-group__heading::before { content: none; }
+.prose .link-group__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+.prose .link-card-wrap {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.prose .link-card-wrap::marker { content: ""; }
+.prose .link-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.65rem;
+  padding: 0.95rem 1rem 1.05rem;
+  border: 1px solid var(--rule);
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--ink);
+  text-decoration: none;
+  height: 100%;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    border-color 220ms var(--ease),
+    background 220ms var(--ease),
+    color 220ms var(--ease),
+    transform 220ms var(--ease);
+}
+.prose .link-card::before {
+  /* corner-bracket accent that grows on hover */
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent);
+  transition: width 320ms var(--ease);
+  z-index: 1;
+}
+.prose .link-card:hover {
+  border-color: var(--ink);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+.prose .link-card:hover::before { width: 100%; }
+.prose .link-card:hover .link-card__arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+.prose .link-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.prose .link-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.prose .link-card__source {
+  font-family: var(--body);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 700;
+}
+.prose .link-card__arrow {
+  font-family: var(--body);
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--ink-mute);
+  transition: color 220ms var(--ease), transform 260ms var(--ease);
+}
+.prose .link-card__title {
+  font-family: var(--read);
+  font-style: italic;
+  font-variation-settings: "opsz" 16;
+  font-size: clamp(0.98rem, 0.92rem + 0.2vw, 1.12rem);
+  line-height: 1.4;
+  color: var(--ink);
+  letter-spacing: -0.003em;
+  text-wrap: balance;
+  /* drop the default browser link underline (inherited from .prose a) */
+  border-bottom: 0;
+}
+.prose .link-card:hover .link-card__title { color: var(--ink); }
+
+@media (max-width: 720px) {
+  .prose .link-group__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .prose hr {
   border: 0;
   margin: 2.5rem auto;
@@ -890,9 +1075,101 @@ body > *:not(.bg) { position: relative; z-index: 1; }
   .prose > h2 + p::first-letter { font-size: 3.5em; }
 }
 
+/* ─────────────────────────────────────────────────────────
+   BACK-TO-TOP — vertical editorial slab, fixed bottom-right
+   Hidden until the user scrolls past the hero / issue head.
+   ───────────────────────────────────────────────────────── */
+.to-top {
+  position: fixed;
+  right: clamp(1rem, 1.5vw, 1.75rem);
+  bottom: clamp(1rem, 1.5vw, 1.75rem);
+  z-index: 50;
+
+  display: inline-grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem 0.7rem;
+
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  /* No radius. Square slab. */
+
+  font-family: var(--body);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 280ms var(--ease),
+    transform 280ms var(--ease),
+    background 220ms var(--ease),
+    border-color 220ms var(--ease);
+}
+.to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.to-top:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.to-top:hover .to-top__arrow {
+  transform: translateY(-4px);
+}
+.to-top:hover .to-top__rule {
+  width: 1.5rem;
+  opacity: 0.85;
+}
+.to-top:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.to-top__arrow {
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--paper);
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  transition: transform 260ms var(--ease);
+}
+.to-top__rule {
+  display: block;
+  width: 1.05rem;
+  height: 1px;
+  background: var(--paper);
+  opacity: 0.55;
+  transition: width 260ms var(--ease), opacity 260ms var(--ease);
+}
+.to-top__label {
+  display: block;
+  color: var(--paper);
+}
+
+@media (max-width: 720px) {
+  .to-top {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    padding: 0.7rem 0.55rem;
+    font-size: 0.58rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+  .to-top { transform: none; }
 }
