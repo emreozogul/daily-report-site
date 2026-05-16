@@ -9,10 +9,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=2026-05-16T18:50:23+00:00">
+<link rel="stylesheet" href="assets/site.css?v=2026-05-16T18:57:53+00:00">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body class="page-index">
+
+<div class="read-progress" aria-hidden="true">
+  <span class="read-progress__bar"></span>
+</div>
 
 <div class="bg" aria-hidden="true">
   <div class="bg__wash bg__wash--warm"></div>
@@ -94,7 +98,7 @@
   <p class="colophon__line colophon__line--meta">
     <a href="https://github.com/emreozogul/daily-report-site">github.com/emreozogul/daily-report-site</a>
     <span aria-hidden="true">·</span>
-    <time datetime="2026-05-16T18:50:23+00:00">Son derleme 2026-05-16 18:50 UTC</time>
+    <time datetime="2026-05-16T18:57:53+00:00">Son derleme 2026-05-16 18:57 UTC</time>
   </p>
 </footer>
 
@@ -120,6 +124,26 @@
     btn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+    update();
+  })();
+
+  /* Reading-progress indicator: thin teal bar at the top of the viewport
+     that fills from left to right as the user scrolls the article. */
+  (function () {
+    var bar = document.querySelector('.read-progress__bar');
+    if (!bar) return;
+    var ticking = false;
+    function update() {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+      bar.style.transform = 'scaleX(' + pct + ')';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
     update();
   })();
 </script>

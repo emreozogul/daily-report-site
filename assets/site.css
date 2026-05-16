@@ -974,9 +974,8 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
 
 .prose .forecast-card {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.7rem;
-  align-items: start;
+  grid-template-rows: auto auto 1fr;
+  gap: 0.35rem;
   padding: 0.85rem 1rem 1rem;
   border: 1px solid var(--rule);
   background:
@@ -1034,22 +1033,27 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
 .prose .forecast-card--down { --dir-color: var(--dir-down); }
 .prose .forecast-card--flat { --dir-color: var(--dir-flat); }
 
-.prose .forecast-card__indicator {
-  font-family: var(--display);
-  font-style: italic;
-  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 96;
-  font-size: 1.45rem;
-  line-height: 1;
+.prose .forecast-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--body);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--dir-color);
-  width: 1.25rem;
-  text-align: center;
-  padding-top: 0.05rem;
+  font-weight: 700;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.1rem;
+  position: relative;
 }
-
-.prose .forecast-card__body {
-  display: grid;
-  gap: 0.2rem;
-  min-width: 0;
+.prose .forecast-card__label::before {
+  /* short rule before the label — feels like an editorial tag */
+  content: "";
+  display: inline-block;
+  width: 0.9rem;
+  height: 1px;
+  background: var(--dir-color);
 }
 
 .prose .forecast-card__name {
@@ -1058,18 +1062,19 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
   font-style: italic;
   font-weight: 500;
   font-feature-settings: "ss01", "kern";
-  font-size: 0.98rem;
-  line-height: 1.25;
+  font-size: 1.05rem;
+  line-height: 1.22;
   color: var(--ink);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.008em;
 }
 
 .prose .forecast-card__reason {
   display: block;
   font-family: var(--body);
-  font-size: 0.78rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.5;
   color: var(--ink-faint);
+  margin-top: 0.15rem;
 }
 
 @media (max-width: 540px) {
@@ -1326,6 +1331,30 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
 
   .prose > h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 1.8rem); }
   .prose > h2 + p::first-letter { font-size: 3.5em; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   READ PROGRESS — thin teal bar fixed to the top of the page
+   that fills left-to-right as the user scrolls the article.
+   ───────────────────────────────────────────────────────── */
+.read-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 70;
+  pointer-events: none;
+  background: transparent;
+}
+.read-progress__bar {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  /* No transition — track follows scroll one-to-one for tactile feel */
+  will-change: transform;
+  opacity: 0.92;
 }
 
 /* ─────────────────────────────────────────────────────────
