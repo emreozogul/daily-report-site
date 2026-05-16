@@ -5,36 +5,40 @@
    ============================================================ */
 
 :root {
-  /* Surfaces — warm pearl paper, less yellow than before */
-  --paper:        #f3ede0;
-  --paper-deep:   #ebe3d2;
-  --paper-edge:   #ddd2bb;
+  /* Surfaces — soft linen, more neutral than warm cream.
+     Less yellow, slightly cooler, holds slate ink with quiet contrast. */
+  --paper:        #f3efe7;
+  --paper-deep:   #ebe6d9;
+  --paper-edge:   #d4ccb8;
 
-  /* Atmospheric tints — sit behind everything, barely visible */
-  --wash-warm:    oklch(91% 0.04 55);     /* almost-white pearl */
-  --wash-cool:    oklch(91% 0.022 170);   /* whisper of sage */
+  /* Atmospheric tints — barely visible mesh.
+     Warm peach lift in one corner, slate-blue hint in the other. */
+  --wash-warm:    oklch(91% 0.03 60);
+  --wash-cool:    oklch(89% 0.035 230);
 
-  /* Ink — slightly warmer near-black, refined contrast */
-  --ink:        #1e1a16;
-  --ink-soft:   #514941;
-  --ink-faint:  #8a8174;
-  --ink-mute:   #b8ad96;
-  --rule:       #d6cbb1;
-  --rule-soft:  #e6ddc6;
+  /* Ink — deep slate blue. Not pure black, not navy.
+     Has a quiet maritime weight while remaining bookish. */
+  --ink:        #1c2330;
+  --ink-soft:   #4e5562;
+  --ink-faint:  #8b919a;
+  --ink-mute:   #bdc0c6;
+  --rule:       #cdc5b3;
+  --rule-soft:  #ddd6c3;
 
-  /* Single accent — deeper, more bookbinding-leather than terracotta */
-  --accent:       #8c3520;
-  --accent-hi:    #a8412c;
-  --accent-soft:  #efd9c7;
+  /* Single accent — deep oxidised teal.
+     Cooler than oxblood, refined, uncommon in news design. */
+  --accent:       #1e6b66;
+  --accent-hi:    #2a8c87;
+  --accent-soft:  #cfe1df;
 
-  /* Forecast direction colors — sage-leaning forest for up,
-     bookbinding leather for down (matches accent), faint ink for flat */
-  --dir-up:        #4f6f3e;
-  --dir-up-soft:   #d8e3cd;
-  --dir-down:      #8c3520;
-  --dir-down-soft: #efd9c7;
-  --dir-flat:      #8a8174;
-  --dir-flat-soft: #e6ddc6;
+  /* Forecast direction colors — independent of accent now.
+     Forest for up, russet for down, slate-faint for flat. */
+  --dir-up:        #2f5e3e;
+  --dir-up-soft:   #d2dfca;
+  --dir-down:      #a8493a;
+  --dir-down-soft: #f1d8d2;
+  --dir-flat:      #8b919a;
+  --dir-flat-soft: #dee0e4;
 
   /* Type system
      --display : huge italic editorial type (date, headings)
@@ -799,15 +803,39 @@ body > *:not(.bg):not(.to-top) { position: relative; z-index: 1; }
 }
 
 .prose > h3 {
+  position: relative;
   font-family: var(--display);
-  font-weight: 500;
+  font-weight: 400;
   font-style: italic;
   font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 72;
-  font-size: clamp(1.15rem, 0.98rem + 0.45vw, 1.45rem);
-  line-height: 1.25;
-  margin: 2.25rem 0 0.6rem;
+  font-size: clamp(1.22rem, 1rem + 0.55vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   color: var(--ink);
-  letter-spacing: -0.012em;
+  margin: 2.75rem 0 0.85rem;
+  padding-top: 1.25rem;
+  text-wrap: balance;
+}
+.prose > h3::before {
+  /* Editorial separator — short accent rule above the title */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--accent);
+}
+.prose > h3::after {
+  /* Faint continuation hairline trailing off to the right of the accent
+     rule, so each subhead reads as a deliberate ledger entry */
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 2.7rem;
+  right: 0;
+  height: 1px;
+  background: var(--rule-soft);
 }
 
 .prose p {
